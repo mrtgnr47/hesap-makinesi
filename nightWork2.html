@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title> Bootstrap Örneği</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        div div {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row" style="margin-bottom: 0px;" !important>
+            <div class="col-lg-12">
+                <h1 id="result">0</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <button onclick="writeBox(1)" class="btn btn-outline-info btn-block">1</button>
+            </div>
+            <div class="col-lg-4">
+                <button onclick="writeBox(2)" class="btn btn-outline-info btn-block">2</button>
+            </div>
+            <div class="col-lg-4">
+                <button onclick="writeBox(3)" class="btn btn-outline-info btn-block">3</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <button onclick="writeBox(4)" class="btn btn-outline-info btn-block">4</button>
+            </div>
+            <div class="col-lg-4">
+                <button onclick="writeBox(5)" class="btn btn-outline-info btn-block">5</button>
+            </div>
+            <div class="col-lg-4">
+                <button onclick="writeBox(6)" class="btn btn-outline-info btn-block">6</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <button onclick="writeBox(7)" class="btn btn-outline-info btn-block">7</button>
+            </div>
+            <div class="col-lg-4">
+                <button onclick="writeBox(8)" class="btn btn-outline-info btn-block">8</button>
+            </div>
+            <div class="col-lg-4">
+                <button onclick="writeBox(9)" class="btn btn-outline-info btn-block">9</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <button onclick="islemYap('+')" class="btn btn-outline-info btn-block">+</button>
+            </div>
+            <div class="col-lg-4">
+                <button onclick="islemYap('-')" class="btn btn-outline-info btn-block">-</button>
+            </div>
+            <div class="col-lg-4">
+                <button onclick="islemYap('*')" class="btn btn-outline-info btn-block">*</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <button onclick="islemYap('/')" class="btn btn-outline-info btn-block">/</button>
+            </div>
+            <div class="col-lg-4">
+                <button onclick="writeBox(0)" class="btn btn-outline-info btn-block">0</button>
+            </div>
+            <div class="col-lg-4">
+                <button onclick="bitir()" class="btn btn-outline-info btn-block">=</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <button onclick="save()" class="btn btn-success btn-block">Kaydet</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <span>Geçmiş İşlemler</span>
+                    </div>
+                    <div class="card-body">
+                        <table id="results" class="table">
+                            <tbody>
+                                <tr>
+                                    <th>Birinc Sayı</th>
+                                    <th>İşlem</th>
+                                    <th>İkinci Sayı </th>
+                                    <th> Sonuç </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        var first = 0;
+        var islem = '+';
+        var second = 0;
+        var result = 0;
+
+        function writeBox(value) {
+            var text = document.getElementById('result');
+            var current = text.innerHTML.trim();
+            if (current == "0") {
+                text.innerHTML = value;
+            }
+            else
+                text.innerHTML = text.innerHTML + value;
+        }
+
+        function islemYap(value) {
+            var text = document.getElementById('result');
+            first = parseFloat(text.innerHTML.trim());
+            text.innerHTML = 0;
+            islem = value;
+        }
+
+        function bitir() {
+            var text = document.getElementById('result');
+            second = parseFloat(text.innerHTML.trim());
+            switch (islem) {
+                case '+': result = first + second; break
+                case '-': result = first - second; break
+                case '*': result = first * second; break
+                case '/': result = first / second; break
+            }
+            text.innerHTML = result;
+        }
+
+        function save() {
+            var tablo = document.getElementById('results');
+            var row = tablo.insertRow();
+            row.innerHTML = "<tr><td>" + first+" </td><td>" + islem + " </td><td>" + second + " </td><td>" + result + " </td>" + "</tr>";
+        }
+
+
+    </script>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
